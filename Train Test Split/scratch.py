@@ -52,9 +52,6 @@ def manual_train_test_split(X, y, test_size=0.2, shuffle=True, random_state=None
     test_indices = indices[:test_len]
     train_indices = indices[test_len:]
 
-    print("Train Indices:", train_indices)
-    print("Test Indices:", test_indices)
-
     X_train = X[train_indices]
     X_test = X[test_indices]
     y_train = y[train_indices]
