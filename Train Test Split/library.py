@@ -30,6 +30,8 @@ print("y_train shape:", y_train.shape)
 print("y_test shape:", y_test.shape)
 
 
+# Demonstrating effect of shuffling and random_state
+
 
 X = np.arange(10).reshape((10, 1))
 # Labels: first 5 samples labeled 0, next 5 labeled 1
