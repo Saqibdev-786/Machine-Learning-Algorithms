@@ -1,6 +1,7 @@
 # Implementation of Train Test Split from scratch
 
 from sklearn import datasets
+import numpy as np
 import random
 
 def manual_train_test_split(X, y, test_size=0.2, shuffle=True, random_state=None):
@@ -23,7 +24,7 @@ def manual_train_test_split(X, y, test_size=0.2, shuffle=True, random_state=None
 
     Returns:
     --------
-    X_train, X_test, y_train, y_test : lists
+    X_train, X_test, y_train, y_test : arrays
         Split datasets for training and testing. 
     """
 
@@ -33,25 +34,31 @@ def manual_train_test_split(X, y, test_size=0.2, shuffle=True, random_state=None
     if len(X) != len(y):
         raise ValueError("X and y must have the same number of samples")
     
+    X = np.array(X)
+    y = np.array(y)
+
     if random_state is not None:
-        random.seed(random_state)
+        np.random.seed(random_state)
     
-    # Create a list of indices and shuffle them if required
-    indices = list(range(len(X)))
+
+
+    # Shuffle the indices
+    indices = np.arange(X.shape[0])
     if shuffle:
-        random.shuffle(indices)
+        np.random.shuffle(indices)
     
-    test_len = int(len(X) * test_size)
+    test_len = int(X.shape[0] * test_size)
 
     test_indices = indices[:test_len]
     train_indices = indices[test_len:]
 
-    X_train = [X[i] for i in train_indices]
-    X_test = [X[i] for i in test_indices]
-    y_train = [y[i] for i in train_indices]
-    y_test = [y[i] for i in test_indices]
+    X_train = X[train_indices]
+    X_test = X[test_indices]
+    y_train = y[train_indices]
+    y_test = y[test_indices]
 
     return X_train, X_test, y_train, y_test
+
 
 
 # Load Iris dataset
@@ -76,24 +83,27 @@ X_train, X_test, y_train, y_test=manual_train_test_split(X, y, test_size=0.2)
 
 
 print("\nAfter Train-Test Split:")
-print(f"X_train shape: ({len(X_train)}, {len(X_train[0])})")
-print(f"X_test shape: ({len(X_test)}, {len(X_test[0])})")
-print(f"y_train shape: ({len(y_train)},)")
-print(f"y_test shape: ({len(y_test)},)")
+print("X_train shape:", X_train.shape)
+print("X_test shape:", X_test.shape)
+print("y_train shape:", y_train.shape)
+print("y_test shape:", y_test.shape)
 
 
 
 # Demonstrating effect of shuffling and random_state
-X = [[i] for i in range(10)]
+X = np.arange(10).reshape((10, 1))
 # Labels: first 5 samples labeled 0, next 5 labeled 1
-y = [0]*5 + [1]*5
+y = np.array([0]*5 + [1]*5)
+
+print(X)
+print(y)
 
 # Split WITHOUT shuffling: Use this to understand shuffle and random_state
 X_train, X_test, y_train, y_test = manual_train_test_split(X, y, test_size=0.3, shuffle=True, random_state=None)
 
 print("\nExample Split (with shuffle and random_state):")
-print("X_train:", X_train)
+print("X_train:", X_train.flatten())
 print("y_train:", y_train)
-print("X_test:", X_test)
+print("X_test:", X_test.flatten())
 print("y_test:", y_test)
 

@@ -31,8 +31,6 @@ print("y_test shape:", y_test.shape)
 
 
 # Demonstrating effect of shuffling and random_state
-
-
 X = np.arange(10).reshape((10, 1))
 # Labels: first 5 samples labeled 0, next 5 labeled 1
 y = np.array([0]*5 + [1]*5)
