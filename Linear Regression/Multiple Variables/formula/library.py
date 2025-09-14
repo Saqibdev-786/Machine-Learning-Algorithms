@@ -42,3 +42,7 @@ print("Mean Squared Error: ", mean_squared_error(y_test, predictions))
 print("R^2 Score: ", r2_score(y_test, predictions))
 print("Coefficients: ", model.coef_)
 print("Intercept: ", model.intercept_)
+
+# Coefficients:  [ -47.88303306 -253.52208312  457.16371972  352.02999697 -795.37064959
+#   506.22154615  142.56380846  196.30002985  751.09154938  102.02650055]
+# Intercept:  150.54870825321706
